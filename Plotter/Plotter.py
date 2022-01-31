@@ -1,36 +1,11 @@
-from matplotlib.legend_handler import HandlerTuple
+
 import matplotlib.pyplot as plt
 from matplotlib import cm, colors
-import matplotlib.patches as mpatches
 import numpy as np
-from scipy.signal import find_peaks
 import itertools
 import matplotlib as mpl
-import random
-import os,csv
 
 
-def getDatafromExcel(file):
-    # returns real data from csv assuming it is flux*nu v nu
-    csv.reader(file)
-    fields = []
-    rows = []
-    Xdata = []
-    ldata = []
-    with open(file, 'r') as csvfile:
-        csvreader = csv.reader(csvfile)
-        fields = next(csvreader)
-        for row in csvreader:
-            rows.append(row)
-
-    for row in rows:
-        Xdata.append(float(row[0]))
-        ldata.append(float(row[1]))
-
-    Ldata_nu = np.array(ldata)
-    xdata = np.array(Xdata)
-
-    return xdata, Ldata_nu
 
 class figret:
     def __init__(self, fig, ax, pyplt, plots):
