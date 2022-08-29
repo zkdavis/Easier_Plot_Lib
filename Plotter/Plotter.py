@@ -117,11 +117,13 @@ class Plotter:
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylable)
         ax.set_title(title)
-
-        if (miny != None or maxy != None):
-            ax.set_ylim(miny, maxy)
-        if (minx != None or maxx != None):
-            ax.set_xlim(minx, maxx)
+        try:
+            if (miny != None or maxy != None):
+                ax.set_ylim(miny, maxy)
+            if (minx != None or maxx != None):
+                ax.set_xlim(minx, maxx)
+        except:
+            print("couldn't set limits")
         plots = []
         for ds in datasets:
             pl = None
