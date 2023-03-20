@@ -88,15 +88,7 @@ class dataset:
 class Plotter:
     def __init__(self):
 
-        self.sync_pk = "sync_pk"
-        self.eic_pk = "eic_pk"
-        self.ssc_pk = "ssc_pk"
-        self.lj_par = "lj_par"
-        self.lj_par = r"$L_{jet}$"
-        self.sigma_par = "sigma_par"
-        self.sigma_latex = r"$\sigma$"
-        self.gammaB_par = "gammaB_par"
-        self.gammaB_latex = r"$\Gamma$"
+
         self.markers = itertools.cycle((',', '+', '.', 'o', '*'))
         self.linesstyles = itertools.cycle(('--', '-.', '-', ':'))
         self.colors = itertools.cycle(['b', 'g', 'r', 'c', 'm', 'y', 'k', 'tab:purple', 'tab:gray', 'tab:orange'])
