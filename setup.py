@@ -1,6 +1,6 @@
 from setuptools import setup
 
-setup(name='Plotter',
+setup(name='easierplotlib',
 version='0.1',
 description='Testing installation of Package',
 # url='#',
