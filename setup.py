@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='easierplotlib',
-version='0.1',
+version='0.2',
 description='Testing installation of Package',
 # url='#',
 author='Zachary Davis',
