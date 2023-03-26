@@ -1,6 +1,7 @@
 # Easier_Plot_Lib
 # Installation:
 ...
+
 pip install easierplotlib
 ...
 # Description:
