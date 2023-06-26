@@ -50,6 +50,8 @@ class dataset:
         self.colorparametername = None
         self.markerparametername = None
         self.elinewidth = None
+        self.uplims = False
+        self.lolims = False
 
     def getSlope(self):
         if(self.x is not None and self.y is not None):
@@ -131,63 +133,63 @@ class Plotter:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, c=ds.color, linestyle=ds.marker, label=ds.label, linewidth=ds.marker_size)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, fmt=ds.marker, label=ds.label, ms=ds.marker_size, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, fmt=ds.marker, label=ds.label, ms=ds.marker_size, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             if ds.color == None and ds.marker != None and ds.label != None and ds.marker_size != None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, linestyle=ds.marker, label=ds.label, linewidth=ds.marker_size)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, fmt=ds.marker, label=ds.label, ms=ds.marker_size, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, fmt=ds.marker, label=ds.label, ms=ds.marker_size, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             if ds.color != None and ds.marker != None and ds.label != None and ds.marker_size==None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, c=ds.color, linestyle=ds.marker, label=ds.label)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, fmt=ds.marker, label=ds.label, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, fmt=ds.marker, label=ds.label, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
 
             if ds.color == None and ds.marker != None and ds.label != None and ds.marker_size == None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, linestyle=ds.marker, label=ds.label)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, fmt=ds.marker, label=ds.label, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, fmt=ds.marker, label=ds.label, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             if ds.color != None and ds.marker == None and ds.label != None and ds.marker_size != None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, c=ds.color, label=ds.label, linewidth=ds.marker_size)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, label=ds.label, ms=ds.marker_size, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, label=ds.label, ms=ds.marker_size, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             if ds.color != None and ds.marker == None and ds.label == None and ds.marker_size != None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, c=ds.color, label=ds.label, ms=ds.marker_size)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, label=ds.label, ms=ds.marker_size, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, label=ds.label, ms=ds.marker_size, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             if ds.color != None and ds.marker == None and ds.label != None and ds.marker_size == None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, c=ds.color, label=ds.label)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, label=ds.label, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, label=ds.label, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             if ds.color != None and ds.marker != None and ds.label == None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, c=ds.color, linestyle=ds.marker)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, fmt=ds.marker, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, fmt=ds.marker, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             if ds.color == None and ds.marker == None and ds.label != None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, label=ds.label)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, label=ds.label, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, label=ds.label, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             if ds.color == None and ds.marker != None and ds.label == None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, linestyle=ds.marker)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, fmt=ds.marker, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, fmt=ds.marker, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             if ds.color != None and ds.marker == None and ds.label == None and ds.marker_size == None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y, c=ds.color)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, c=ds.color, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             if ds.color == None and ds.marker == None and ds.label == None:
                 if ds.plot_type == ds.plottype:
                     pl = ax.plot(ds.x, ds.y)
                 else:
-                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, elinewidth=ds.elinewidth)
+                    pl = ax.errorbar(ds.x, ds.y, yerr=yer, xerr=xer, elinewidth=ds.elinewidth, lolims=ds.lolims,uplims=ds.uplims)
             plots.append(pl)
         if(build_legend):
             handles, labels = ax.get_legend_handles_labels()
