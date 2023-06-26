@@ -112,13 +112,7 @@ class Plotter:
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylable)
         ax.set_title(title)
-        try:
-            if (miny != None or maxy != None):
-                ax.set_ylim(miny, maxy)
-            if (minx != None or maxx != None):
-                ax.set_xlim(minx, maxx)
-        except:
-            print("couldn't set limits")
+
         plots = []
         for ds in datasets:
             pl = None
@@ -251,6 +245,13 @@ class Plotter:
             #
             # else:
             ax.legend(handles, labels, loc="best", prop={'size': 10})
+        try:
+            if (miny != None or maxy != None):
+                ax.set_ylim(miny, maxy)
+            if (minx != None or maxx != None):
+                ax.set_xlim(minx, maxx)
+        except:
+            print("couldn't set limits")
         fr=figret(fig, ax, pyplt, plots)
         fr.dss=datasets
         return fr
