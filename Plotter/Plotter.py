@@ -86,14 +86,83 @@ class dataset:
 
 class Plotter:
     def __init__(self):
-
-
         self.markers = itertools.cycle((',', '+', '.', 'o', '*'))
         self.linesstyles = itertools.cycle(('--', '-.', '-', ':'))
         self.colors = itertools.cycle(['b', 'g', 'r', 'c', 'm', 'y', 'k', 'tab:purple', 'tab:gray', 'tab:orange'])
 
 
 
+
+    # Fill a contour between two lines
+    def fill_between_with_colormap(self,fr:figret, ds1:dataset,ds2:dataset, colors=None,cmap=plt.get_cmap("Reds"), **kwargs):
+        #colors = models of x if none will just be linear in x
+        #code mostly ripped from a stackoverflow question
+        if(colors is not None):
+            norm = mpl.colors.Normalize(vmin=np.min(colors), vmax=np.max(colors))
+        else:
+            norm = mpl.colors.Normalize(vmin=np.min(ds1.x), vmax=np.max(ds1.x))
+        def rect(ax, x, y, w, h, c, **kwargs):
+            # Varying only in x
+            if len(c.shape) is 1:
+                rect = plt.Rectangle((x, y), w, h, color=c, ec=c, **kwargs)
+                ax.add_patch(rect)
+            # Varying in x and y
+            else:
+                # Split into a number of bins
+                N = c.shape[0]
+                hb = h / float(N);
+                yl = y
+                for i in range(N):
+                    yl += hb
+                    rect = plt.Rectangle((x, yl), w[i], hb,
+                                         color=c[i, :], ec=c[i, :], **kwargs)
+                    ax.add_patch(rect)
+
+        Y1 = ds1.y
+        Y2 = ds2.y
+        X = ds1.x
+        ax = fr.ax
+        fr.pyplt.plot(X, Y1, lw=0)  # Plot so the axes scale correctly
+        dx = np.zeros_like(X)
+        dx[1:] = np.abs(X[:len(X) - 1] - X[1:])
+        dx[1:] = dx[1:] * (1 + 0.028)
+        dx[0] = np.abs(X[0] - X[1])
+        N = X.size
+
+        # Pad a float or int to same size as x
+        if (type(Y2) is float or type(Y2) is int):
+            Y2 = np.array([Y2] * N)
+
+        # No colors -- specify linear
+        if colors is None:
+            colors = []
+            for n in range(N):
+                colors.append(cmap(n / float(N)))
+        # Varying only in x
+        elif len(colors.shape) is 1:
+            colors = cmap((colors - colors.min())
+                          / (colors.max() - colors.min()))
+        # Varying only in x and y
+        else:
+            cnp = np.array(colors)
+            colors = np.empty([colors.shape[0], colors.shape[1], 4])
+            for i in range(colors.shape[0]):
+                for j in range(colors.shape[1]):
+                    colors[i, j, :] = cmap((cnp[i, j] - cnp[:, :].min())
+                                           / (cnp[:, :].max() - cnp[:, :].min()))
+
+        colors = np.array(colors)
+
+        # Create the patch objects
+        for (color, x, y1, y2,dx) in zip(colors, X, Y1, Y2,dx):
+            rect(ax, x, y2, dx, y1 - y2, color, **kwargs)
+
+        #add colorbar
+        #todo add colorbar parameters probably a colorbar object
+        # cbax = fig.add_axes([0.85, 0.12, 0.05, 0.78])
+
+        cb = fr.pyplt.colorbar(cm.ScalarMappable(norm=norm, cmap=cmap),ax=fr.ax)
+        # cb.set_label("Sin function", rotation=270, labelpad=15)
     def Plot(self, datasets: [dataset], title="Plot",
              xlabel=r"X-axis", ylable=r"Y-axis", xscale="log", yscale="log", figsize=15, maxy=None, miny=None,
              maxx=None, minx=None, fig=None, ax=None, pyplt=None,build_legend=True):
